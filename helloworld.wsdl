@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?> 
+ <definitions xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" 
+	xmlns:tns="http://localhost/SoapServer/HelloWorld" 
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+	xmlns="http://schemas.xmlsoap.org/wsdl/" 
+	targetNamespace="http://localhost/soap/HelloWorld">
+  <types>
+  <xsd:schema targetNamespace="http://localhost/soap/HelloWorld">
+  <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" /> 
+  <xsd:import namespace="http://schemas.xmlsoap.org/wsdl/" /> 
+  </xsd:schema>
+  </types>
+
+  <message name="HelloWorldRequest">
+	  <part name="strName" type="xsd:string" /> 
+	  <part name="strEmail" type="xsd:string" /> 
+  </message>
+
+  <message name="HelloWorldResponse">
+	<part name="return" type="xsd:string" /> 
+  </message>
+
+  <portType name="HelloWorldPortType">
+  <operation name="HelloWorld">
+	  <input message="tns:HelloWorldRequest" /> 
+	  <output message="tns:HelloWorldResponse" /> 
+  </operation>
+  </portType>
+
+  <binding name="HelloWorldBinding" type="tns:HelloWorldPortType">
+	  <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http" /> 
+	  <operation name="HelloWorld">
+	  <soap:operation soapAction="http://localhost/SoapServer/WebServiceServer.php/HelloWorld" style="rpc" /> 
+	  <input>
+		<soap:body use="encoded" namespace="" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" /> 
+	  </input>
+	  <output>
+		 <soap:body use="encoded" namespace="" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" /> 
+	  </output>
+	  </operation>
+  </binding>
+
+  <service name="HelloWorld">
+ <port name="HelloWorldPort" binding="tns:HelloWorldBinding">
+	<soap:address location="http://localhost/SoapServer/WebServiceServer.php" /> 
+  </port>
+  </service>
+</definitions>

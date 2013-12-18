@@ -1,0 +1,8 @@
+<head>
+<script>
+function loadXMLDoc()
+{
+.... AJAX script goes here ...
+}
+</script>
+</head>
